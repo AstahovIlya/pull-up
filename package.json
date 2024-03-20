@@ -1,0 +1,20 @@
+{
+   "name": "working-file",
+   "version": "1.0.0",
+   "description": "",
+   "main": "script.js",
+   "type": "module",
+   "scripts": {
+      "build": "webpack",
+      "dev": "webpack --mode development",
+      "prod": "webpack --mode production",
+      "watch": "webpack --mode development --watch "
+   },
+   "author": "Ilya Astahov",
+   "license": "ISC",
+   "devDependencies": {
+      "webpack": "^5.90.3",
+      "webpack-cli": "^5.1.4",
+      "webpack-dev-server": "^5.0.3"
+   }
+}
