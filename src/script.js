@@ -36,15 +36,15 @@ document.addEventListener('DOMContentLoaded', function () {
                startTimer('.timer', timeAproach, clouseTimer);
             }
          } else if (currentDay == 2) {
-            if (approaches[length - 1] <= approaches[length - 2]) {
+            if (approaches.at(-1) <= approaches.at(-2)) {
                tranings[currentDay]['approaches'] = approaches;
                localStorage.setItem('approaches', JSON.stringify(tranings))
                document.location.href = 'result.html';
             } else {
-               startTimer('.timer', timeAproach, clouseTimer);
+               startTimer('.timer', timeAproach * approaches.length, clouseTimer);
             }
          } else if (currentDay == 4) {
-            if (approaches[length - 1] < approaches[length - 2]) {
+            if (approaches.at(-1) < approaches.at(-2)) {
                tranings[currentDay]['approaches'] = approaches;
                localStorage.setItem('approaches', JSON.stringify(tranings))
                document.location.href = 'result.html';
