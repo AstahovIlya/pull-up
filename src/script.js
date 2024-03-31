@@ -4,6 +4,81 @@ import { increaseValue, decreaseValue } from './js/control.js';
 document.addEventListener('DOMContentLoaded', function () {
    setTitleText('h1');
    let currentDay = new Date().getDay();
+   if (currentDay == 5) {
+      getCurrentDay.then(function (result) {
+         startProgram(result);
+      })
+   } else {
+      document.querySelector('.menu').style.display = 'none'
+      startProgram(currentDay)
+   }
+
+});
+
+function setTitleText(selectorTitle) {
+   let title = document.querySelector(selectorTitle);
+   let currentDay = new Date().getDay();
+
+   title.textContent = currentDay !== 0 && currentDay !== 6 ? `День ${currentDay}` : 'Выходной';
+}
+
+function startTimer(selectorTimer, time, clouseTimer) {
+   let timerCount = document.querySelector(selectorTimer);
+   timerCount.textContent = time;
+
+   let timerValue = setInterval(function () {
+      timerCount.textContent = Number(timerCount.textContent) - 1;
+      if (timerCount.textContent == 0) {
+         clearInterval(timerValue);
+         clouseTimer(timerCount.parentElement)
+      }
+   }, 1000)
+}
+
+function clouseTimer(body) {
+   body.dataset.stage = 'work';
+}
+
+function setTableResults(results, tableSelector) {
+   let table = document.querySelector(tableSelector);
+
+   for (let i = 0; i <= results.length; i++) {
+      let li = document.createElement('li');
+      li.classList.add('table__line');
+
+      let approach = document.createElement('span');
+      li.appendChild(approach);
+
+      let amount = document.createElement('span');
+      li.appendChild(amount);
+
+      if (i == results.length) {
+         approach.textContent = `Итого`;
+         amount.textContent = results.reduce((sum, e) => sum + Number(e), 0);
+      } else {
+         approach.textContent = `Подход ${i + 1}`;
+         amount.textContent = results[i];
+      }
+
+      table.appendChild(li);
+   }
+}
+
+
+let getCurrentDay = new Promise(function (resolve) {
+   let listDays = document.querySelectorAll('.menu__day');
+   let menu = document.querySelector('.menu');
+
+   for (let day of listDays) {
+      day.addEventListener('click', function () {
+         menu.style.display = 'none';
+         resolve(this.value);
+      })
+   }
+})
+
+function startProgram(numberDay) {
+   let currentDay = numberDay;
 
    let bodyBox = document.querySelector('.body');
    let complateButton = document.querySelector('.complate');
@@ -64,54 +139,5 @@ document.addEventListener('DOMContentLoaded', function () {
       complateButton.addEventListener('click', function () {
          document.location.href = '../index.html';
       })
-   }
-});
-
-function setTitleText(selectorTitle) {
-   let title = document.querySelector(selectorTitle);
-   let currentDay = new Date().getDay();
-
-   title.textContent = currentDay !== 0 || currentDay !== 6 ? `День ${currentDay}` : 'Выходной';
-}
-
-function startTimer(selectorTimer, time, clouseTimer) {
-   let timerCount = document.querySelector(selectorTimer);
-   timerCount.textContent = time;
-
-   let timerValue = setInterval(function () {
-      timerCount.textContent = Number(timerCount.textContent) - 1;
-      if (timerCount.textContent == 0) {
-         clearInterval(timerValue);
-         clouseTimer(timerCount.parentElement)
-      }
-   }, 1000)
-}
-
-function clouseTimer(body) {
-   body.dataset.stage = 'work';
-}
-
-function setTableResults(results, tableSelector) {
-   let table = document.querySelector(tableSelector);
-
-   for (let i = 0; i <= results.length; i++) {
-      let li = document.createElement('li');
-      li.classList.add('table__line');
-
-      let approach = document.createElement('span');
-      li.appendChild(approach);
-
-      let amount = document.createElement('span');
-      li.appendChild(amount);
-
-      if (i == results.length) {
-         approach.textContent = `Итого`;
-         amount.textContent = results.reduce((sum, e) => sum + Number(e), 0);
-      } else {
-         approach.textContent = `Подход ${i + 1}`;
-         amount.textContent = results[i];
-      }
-
-      table.appendChild(li);
    }
 }
