@@ -14,25 +14,30 @@
 </head>
 
 <body>
-   <div class="main-container">
+   <div class="body" data-stage="work">
       <h1></h1>
-      <div data-stage="work" class="body">
-         <div class="pull-up">
-            <div class="pull-up__counter">0</div>
-            <button class="pull-up__button pull-up__button_lower"></button>
-            <button class="pull-up__button pull-up__button_increase"></button>
+      <div class="pull-up">
+         <div class="pull-up__counter">0</div>
+         <div class="pull-up__control">
+            <button class="pull-up__button pull-up__button_lower"><img src="../img/minus.svg" alt="minus"></button>
+            <button class="pull-up__button pull-up__button_increase"><img src="../img/plus.svg" alt="plus"></button>
          </div>
-         <div class="timer">3</div>
       </div>
-      <button class="complate">готово</button>
+      <div class="timer-bar">
+         <div class="timer">3</div>
+         <svg class="timer__progress">
+            <circle r="48%" cx="50%" cy="50%" fill="none" class="timer__line" />
+         </svg>
+      </div>
+      <button class="complate button">готово</button>
    </div>
    <section class="menu">
-      <h2 class="menu__title">Выбирите тренировочный день</h2>
+      <h2 class="menu__title">Выбирите день, который желаете повторить на этой недели</h2>
       <ul class="menu__list">
-         <li class="menu__item"><button value="1" class="menu__day">День 1</button></li>
-         <li class="menu__item"><button value="2" class="menu__day">День 2</button></li>
-         <li class="menu__item"><button value="3" class="menu__day">День 3</button></li>
-         <li class="menu__item"><button value="4" class="menu__day">День 4</button></li>
+         <li class="menu__item"><button value="1" class="menu__day button">День 1</button></li>
+         <li class="menu__item"><button value="2" class="menu__day button">День 2</button></li>
+         <li class="menu__item"><button value="3" class="menu__day button">День 3</button></li>
+         <li class="menu__item"><button value="4" class="menu__day button">День 4</button></li>
       </ul>
    </section>
 </body>
