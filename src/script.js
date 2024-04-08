@@ -14,7 +14,10 @@ let dayMasege = [
 document.addEventListener('DOMContentLoaded', function () {
    setTitleText('h1');
    let currentDay = new Date().getDay();
-   document.querySelector('p').textContent = dayMasege[currentDay];
+   if (document.querySelector('.start-training')) {
+      document.querySelector('p').textContent = dayMasege[currentDay];
+   }
+
    if (document.querySelector('.body').classList.contains('result')) {
       let saveTrening = JSON.parse(localStorage.getItem('approaches'));
       let resultTrening = saveTrening[currentDay]['approaches'];
@@ -30,8 +33,9 @@ document.addEventListener('DOMContentLoaded', function () {
             startProgram(result, traning);
          })
       } else {
-         document.querySelector('.menu').style.display = 'none'
-         startProgram(currentDay, traning)
+         console.log(document.querySelector('.menu'))
+         document.querySelector('.menu').style.display = 'none';
+         startProgram(currentDay, traning);
       }
    }
 
